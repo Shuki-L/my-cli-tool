@@ -1,0 +1,31 @@
+{
+  "name": "tooly",
+  "version": "0.0.1",
+  "description": "CLI tool for common tasks",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "bin": {
+    "tooly": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shuki-L/tooly"
+  },
+  "keywords": [
+    "cli",
+    "command"
+  ],
+  "author": "Shuki Levy",
+  "license": "MIT",
+  "dependencies": {
+    "cfonts": "^2.4.5",
+    "chalk": "^4.1.1",
+    "inquirer": "^8.0.0",
+    "open": "^6.4.0"
+  }
+}
