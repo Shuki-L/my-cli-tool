@@ -1,8 +1,11 @@
 const inquirer = require("inquirer");
+const chalk = require("chalk");
 
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const { goBack, toTime } = require("../helpers");
+
+const { lambda } = require("./localstack/lambda");
 
 const selectLambdaLogStream = (formattedStream) => {
     inquirer
@@ -169,6 +172,11 @@ const localstackMenu = [
         name: "Get Lambda logs",
         value: lambdaLogsAction,
         short: "Lambda logs",
+    },
+    {
+        name: "Get Lambdas names",
+        value: lambda.listFunctions,
+        short: "Lambdas names",
     },
 ];
 
