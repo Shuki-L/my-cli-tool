@@ -39,7 +39,7 @@ const selectLambdaLogStream = (formattedStream) => {
 
                     const logEvents = JSON.parse(stdout).events;
 
-                    console.table(logEvents);
+                    console.log(logEvents);
                     // logEvents.map((event) => {
                     //     // console.log(event.timestamp);
                     //     console.log(event.message);
