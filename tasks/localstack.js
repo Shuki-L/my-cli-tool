@@ -81,7 +81,7 @@ const LambdaGroupNameAction = async (logGroupName) => {
         // prompt user to select lambda log stream
         selectLambdaLogStream(formattedStream);
     } else {
-        console.log(`couldn't fine any log stream`);
+        console.log(`Log stream does not exist`);
     }
 };
 
