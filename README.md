@@ -7,8 +7,8 @@
 Use `npx` if you want to run the CLI tool without installing it, for example
 
 ```
-npx git+ssh://git@github.com:cbrix-company/my-cli-tool.git
-npx git+ssh://git@github.com:cbrix-company/my-cli-tool.git <command>
+npx git+ssh://git@github.com:Shuki-L/my-cli-tool.git
+npx git+ssh://git@github.com:Shuki-L/my-cli-tool <command>
 ```
 
 ### Global installation
@@ -16,7 +16,7 @@ npx git+ssh://git@github.com:cbrix-company/my-cli-tool.git <command>
 Install the package globaly
 
 ```
-npm install -g git+ssh://git@github.com:cbrix-company/my-cli-tool.git
+npm install -g git+ssh://git@github.com:Shuki-L/my-cli-tool
 ```
 
 Just try it:
