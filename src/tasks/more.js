@@ -6,7 +6,7 @@ const action = () => {
             {
                 name: "github",
                 type: "confirm",
-                message: "Have you seen a movie lately?",
+                message: "Have you read a book lately?",
                 default: true,
             },
             {
