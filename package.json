@@ -7,7 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "dev": "ts-node src/index.ts",
+    "start": "node src/index.ts"
   },
   "bin": {
     "tooly": "./index.js"
@@ -28,5 +29,10 @@
     "chalk": "^4.1.1",
     "inquirer": "^8.1.0",
     "open": "^6.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
   }
 }
