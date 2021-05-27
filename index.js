@@ -25,7 +25,7 @@ const mainMenu = [
 const showMenu = () => {
     console.clear();
     const name = false ? `` : DEFAULT_NAME; //allow user to set a name - TBD
-    cfonts.say(`${name} CLI Tool`, { background: "blue", align: "center" });
+    // cfonts.say(`${name} CLI Tool`, { background: "blue", align: "center" });
 
     console.log(
         chalk.black.bgWhite.bold(`Welcome to ${name} CLI tool.

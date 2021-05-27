@@ -14,18 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Shuki-L/tooly"
+    "url": "https://github.com/Shuki-L/my-cli-tool"
   },
   "keywords": [
     "cli",
-    "command"
+    "command",
+    "tooly"
   ],
   "author": "Shuki Levy",
   "license": "MIT",
   "dependencies": {
     "cfonts": "^2.4.5",
     "chalk": "^4.1.1",
-    "inquirer": "^8.0.0",
+    "inquirer": "^8.1.0",
     "open": "^6.4.0"
   }
 }
