@@ -3,7 +3,7 @@ const chalk = require("chalk");
 
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-const { goBack, toTime } = require("../helpers");
+const { toTime } = require("../utils");
 
 const { lambda } = require("./localstack/lambda");
 
@@ -52,97 +52,97 @@ const selectLambdaLogStream = (formattedStream) => {
         });
 };
 
-const LambdaGroupNameAction = async (logGroupName) => {
-    //get list of log groups streams
-    const { error, stdout, stderr } = await exec(
-        `awslocal logs describe-log-streams --log-group-name ${logGroupName} --descending`
-    );
+// const LambdaGroupNameAction = async (logGroupName) => {
+//     //get list of log groups streams
+//     const { error, stdout, stderr } = await exec(
+//         `awslocal logs describe-log-streams --log-group-name ${logGroupName} --descending`
+//     );
 
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
+//     if (error) {
+//         console.log(`error: ${error.message}`);
+//         return;
+//     }
+//     if (stderr) {
+//         console.log(`stderr: ${stderr}`);
+//         return;
+//     }
 
-    const formattedStream = [];
-    const logStreams = JSON.parse(stdout).logStreams;
+//     const formattedStream = [];
+//     const logStreams = JSON.parse(stdout).logStreams;
 
-    if (logStreams.length > 0) {
-        logStreams.forEach((stream, i) => {
-            formattedStream.push({
-                displayName: `${i + 1}) ${toTime(stream.creationTime)}`,
-                logStreamName: stream.logStreamName,
-            });
-        });
+//     if (logStreams.length > 0) {
+//         logStreams.forEach((stream, i) => {
+//             formattedStream.push({
+//                 displayName: `${i + 1}) ${toTime(stream.creationTime)}`,
+//                 logStreamName: stream.logStreamName,
+//             });
+//         });
 
-        // prompt user to select lambda log stream
-        selectLambdaLogStream(formattedStream);
-    } else {
-        console.log(`Log stream does not exist`);
-    }
-};
+//         // prompt user to select lambda log stream
+//         selectLambdaLogStream(formattedStream);
+//     } else {
+//         console.log(`Log stream does not exist`);
+//     }
+// };
 
-const selectLambdaGroupName = (logGroupsNames) => {
-    inquirer
-        .prompt([
-            {
-                type: "list",
-                name: "choice",
-                message: "Which function are you interested in?",
-                loop: false,
-                choices: logGroupsNames.map((groupName) => {
-                    return {
-                        name: groupName.split("/").pop(),
-                        value: groupName,
-                        short: groupName.split("/").pop(),
-                    };
-                }),
-            },
-        ])
-        .then((answers) => {
-            logGroupName = answers.choice;
-            LambdaGroupNameAction(logGroupName);
-        });
-};
+// const selectLambdaGroupName = (logGroupsNames) => {
+//     inquirer
+//         .prompt([
+//             {
+//                 type: "list",
+//                 name: "choice",
+//                 message: "Which function are you interested in?",
+//                 loop: false,
+//                 choices: logGroupsNames.map((groupName) => {
+//                     return {
+//                         name: groupName.split("/").pop(),
+//                         value: groupName,
+//                         short: groupName.split("/").pop(),
+//                     };
+//                 }),
+//             },
+//         ])
+//         .then((answers) => {
+//             logGroupName = answers.choice;
+//             LambdaGroupNameAction(logGroupName);
+//         });
+// };
 
-const lambdaLogsAction = async () => {
-    //get list of log groups
-    const { error, stdout, stderr } = await exec(
-        "awslocal logs describe-log-groups"
-    );
+// const lambdaLogsAction = async () => {
+//     //get list of log groups
+//     const { error, stdout, stderr } = await exec(
+//         "awslocal logs describe-log-groups"
+//     );
 
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
+//     if (error) {
+//         console.log(`error: ${error.message}`);
+//         return;
+//     }
+//     if (stderr) {
+//         console.log(`stderr: ${stderr}`);
+//         return;
+//     }
 
-    const logGroupsNames = [];
-    const logGroups = JSON.parse(stdout).logGroups;
+//     const logGroupsNames = [];
+//     const logGroups = JSON.parse(stdout).logGroups;
 
-    if (logGroups.length > 0) {
-        logGroups.forEach((group) => {
-            logGroupsNames.push(group.logGroupName);
-        });
+//     if (logGroups.length > 0) {
+//         logGroups.forEach((group) => {
+//             logGroupsNames.push(group.logGroupName);
+//         });
 
-        // prompt user to select lambda groupName
-        selectLambdaGroupName(logGroupsNames);
-    } else {
-        console.log(`couldn't fine any log group`);
-    }
-};
+//         // prompt user to select lambda groupName
+//         selectLambdaGroupName(logGroupsNames);
+//     } else {
+//         console.log(`couldn't fine any log group`);
+//     }
+// };
 
 const action = (goBackCB) => {
     inquirer
         .prompt([
             {
-                type: "list", //change to rawlist once https://github.com/SBoudrias/Inquirer.js/pull/1013 is done
+                type: "rawlist",
                 name: "choice",
                 message: "Sweet! What you would like to see in localstack?",
                 loop: false,
@@ -183,7 +183,7 @@ const localstackMenu = [
 const localstack = {
     name: "Query localstack",
     value: action,
-    short: "Short Query localstack",
+    short: "Query localstack",
 };
 
 module.exports = localstack;
