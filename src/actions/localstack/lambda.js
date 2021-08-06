@@ -2,27 +2,7 @@ const execa = require("execa");
 const chalk = require("chalk");
 const getMenu = require("../../menus");
 const { ACTIONS, MENUS } = require("../../constants");
-const { toTime } = require("../../utils");
-
-const _handleError = (error) => {
-    if (error.exitCode) {
-        switch (error.exitCode) {
-            case 255:
-                console.log(
-                    chalk.red.bold(
-                        "ERROR: make shure you have localstack up and running"
-                    )
-                );
-                break; // TODO: add verbose mode
-
-            default:
-                console.log(error);
-                break;
-        }
-    } else {
-        console.log(error);
-    }
-};
+const { toTime, handleError } = require("../../utils");
 
 const listFunctions = async (ctx) => {
     try {
@@ -63,7 +43,7 @@ const listFunctions = async (ctx) => {
             getMenu(MENUS.LOCALSTACK, ctx);
         }
     } catch (error) {
-        _handleError(error);
+        handleError(error);
     }
 };
 
@@ -155,7 +135,7 @@ const _getStreamEvents = async (logGroupName, logStreamName) => {
 
         return JSON.parse(stdout).events;
     } catch (error) {
-        _handleError(error);
+        handleError(error);
     }
 };
 
@@ -170,7 +150,7 @@ const _getLogGroupStreams = async (logGroupName) => {
         ]);
         return JSON.parse(stdout).logStreams;
     } catch (error) {
-        _handleError(error);
+        handleError(error);
     }
 };
 
@@ -179,7 +159,7 @@ const _getStreams = async (ctx, logGroupName) => {
         const logStreams = await _getLogGroupStreams(logGroupName);
         _buildStreamsMenu(ctx, logStreams, logGroupName);
     } catch (error) {
-        _handleError(error);
+        handleError(error);
     }
 };
 
@@ -192,7 +172,7 @@ const _getDescribeLogGroups = async () => {
 
         return JSON.parse(stdout).logGroups;
     } catch (error) {
-        _handleError(error);
+        handleError(error);
     }
 };
 
@@ -201,7 +181,7 @@ const getLogs = async (ctx) => {
         const logGroups = await _getDescribeLogGroups(ctx);
         _buildGroupsMenu(ctx, logGroups);
     } catch (error) {
-        _handleError(error);
+        handleError(error);
     }
 };
 

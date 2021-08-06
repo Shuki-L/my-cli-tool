@@ -26,6 +26,7 @@
   "dependencies": {
     "cfonts": "^2.4.5",
     "chalk": "^4.1.1",
+    "console-table-printer": "^2.10.0",
     "execa": "^5.0.0",
     "inquirer": "^8.1.0",
     "open": "^6.4.0"

@@ -1,6 +1,6 @@
 const { ACTIONS, MENUS } = require("../constants");
 const getMenu = require("../menus");
-const { lambda } = require("../actions/localstack");
+const { lambda, eventBridge } = require("../actions/localstack");
 const { quit } = require("./common");
 
 const performAction = async (answers, ctx) => {
@@ -21,7 +21,9 @@ const performAction = async (answers, ctx) => {
                 
                 // getMenu(MENUS.LOCALSTACK, ctx);
                 break;
-
+            case ACTIONS.LOCALSTACK_EVENT_BRIDGE_STATUS:
+                await eventBridge.showStatus(ctx);
+                break;
             case ACTIONS.GO_BACK:
                 getMenu(ctx.previousMenu, ctx);
                 break;
