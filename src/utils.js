@@ -9,6 +9,27 @@ const prettyPringLambdaLogsEvents = (events) => {
     }
 };
 
+const handleError = (error) => {
+    if (error.exitCode) {
+        switch (error.exitCode) {
+            case 255:
+                console.log(
+                    chalk.red.bold(
+                        "ERROR: make shure you have localstack up and running"
+                    )
+                );
+                break; // TODO: add verbose mode
+
+            default:
+                console.log(error);
+                break;
+        }
+    } else {
+        console.log(error);
+    }
+};
+
 module.exports = {
     toTime,
+    handleError,
 };
