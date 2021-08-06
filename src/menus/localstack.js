@@ -14,7 +14,7 @@ const localstack = {
                 short: "List of lambdas",
             },            
             {
-                name: "Event Bridge status",
+                name: "Event Bridge status ⭐️ New ⭐️",
                 value: ACTIONS.LOCALSTACK_EVENT_BRIDGE_STATUS,
                 short: "Event Bridge status",
             },
