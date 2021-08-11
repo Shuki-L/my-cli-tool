@@ -30,6 +30,7 @@ const getMenu = (menuName, ctx, menus = null) => {
                     name: "choice",
                     message: ctx.menuMessage || "Select option",
                     loop: false,
+                    pageSize: 20,
                     choices: choices,
                 },
             ])
