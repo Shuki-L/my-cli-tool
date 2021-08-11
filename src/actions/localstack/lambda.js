@@ -93,7 +93,8 @@ const _buildStreamsMenu = (ctx, logStreams, logGroupName) => {
                             logGroupName,
                             streamCopy.logStreamName
                         );
-                        console.dir(logEvents);
+                        // console.dir(logEvents);
+                        _prettyPrint(logEvents);
                         getMenu(MENUS.LOCALSTACK, ctx);
                     };
                     getStream();
@@ -120,6 +121,32 @@ const _buildStreamsMenu = (ctx, logStreams, logGroupName) => {
         );
         getMenu(MENUS.LOCALSTACK, ctx);
     }
+};
+
+const _prettyPrint = (logEvents) => {
+    const NO_COLOR_REGEX =
+        /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
+
+    // remove colors from messages
+    // and filter out empty messages and START/END messages
+    logMessages = logEvents
+        .map((e) => e.message.replace(NO_COLOR_REGEX, ""))
+        .filter(
+            (m) => m !== "" && !m.startsWith("START") && !m.startsWith("END")
+        );
+
+    console.log();
+    logMessages.forEach((m) => {
+        if (!m.startsWith("REPORT")) {
+            console.log(chalk.yellow.bold(m));
+        } else {
+            console.log();
+            const report = m.split("\t");
+            report.forEach((r) => {
+                console.log(chalk.blue.bold(r));
+            });
+        }
+    });
 };
 
 const _getStreamEvents = async (logGroupName, logStreamName) => {
