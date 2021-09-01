@@ -18,6 +18,11 @@ const localstack = {
                 value: ACTIONS.LOCALSTACK_EVENT_BRIDGE_STATUS,
                 short: "Event Bridge status",
             },
+            {
+                name: "SQS status ⭐️ New ⭐️",
+                value: ACTIONS.LOCALSTACK_SQS_STATUS,
+                short: "SQS status",
+            },
         ],
     },
 };

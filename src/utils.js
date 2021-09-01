@@ -1,3 +1,5 @@
+const chalk = require("chalk");
+
 const toTime = (epocTime) => {
     return new Date(epocTime).toISOString().slice(0, 19).replace("T", " ");
 };
