@@ -119,15 +119,23 @@ const showStatus = async (ctx) => {
                             t.addRow({
                                 eventBus: `${eventBus.Name}`,
                                 rule: rule.Name,
-                                eventPatternSource: JSON.parse(
-                                    rule.EventPattern
-                                ).source,
-                                eventPatternDetailType: JSON.parse(
-                                    rule.EventPattern
-                                )["detail-type"],
-                                eventPatternDetail: JSON.stringify(
-                                    JSON.parse(rule.EventPattern).detail
-                                ),
+                                eventPatternSource:
+                                    rule.EventPattern !== "null"
+                                        ? JSON.parse(rule.EventPattern).source
+                                        : "",
+                                eventPatternDetailType:
+                                    rule.EventPattern !== "null"
+                                        ? JSON.parse(rule.EventPattern)[
+                                              "detail-type"
+                                          ]
+                                        : "",
+                                eventPatternDetail:
+                                    rule.EventPattern !== "null"
+                                        ? JSON.stringify(
+                                              JSON.parse(rule.EventPattern)
+                                                  .detail
+                                          )
+                                        : "",
                                 target: targetArnArray,
                             });
                         }
