@@ -11,14 +11,14 @@ const getMenu = (menuName, ctx, menus = null) => {
 
         const { items, meta = {} } = menus[menuName];
 
-        ctx.choises = items;
+        ctx.choices = items;
         ctx.isMainMenu = meta.isMain || false;
 
         ctx.previousMenu = meta.isMain ? null : ctx.currentMenu;
         ctx.currentMenu = menuName;
 
         choices = [
-            ...(ctx.choises ? ctx.choises : []),
+            ...(ctx.choices ? ctx.choices : []),
             ...[new inquirer.Separator()],
             ...getCommonMenu(ctx),
         ];
