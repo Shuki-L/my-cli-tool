@@ -35,17 +35,17 @@ const checkForUpdates = (currentVersion, latestRelease) => {
 
 const startApp = async () => {
     console.clear();
-    const { currentVersion } = require("../package.json");
+    const { version } = require("../package.json");
 
     // get latest release
     getLatestRelease()
         .then((latestRelease) => {
             console.log(
                 chalk.black.bgWhite.bold(`Welcome to TOOLY 🛠️!`) +
-                    chalk.gray(`            (Release: ${currentVersion})`)
+                    chalk.gray(`            (Release: ${version})`)
             );
 
-            checkForUpdates(currentVersion, latestRelease);
+            checkForUpdates(version, latestRelease);
         })
         .catch((err) => {
             console.log(chalk.red(`Error: ${err}`));
