@@ -14,7 +14,7 @@ const localstack = {
                 short: "List of lambdas",
             },            
             {
-                name: "Event Bridge status ⭐️ New ⭐️",
+                name: "Event Bridge status",
                 value: ACTIONS.LOCALSTACK_EVENT_BRIDGE_STATUS,
                 short: "Event Bridge status",
             },
@@ -22,6 +22,11 @@ const localstack = {
                 name: "SQS status ⭐️ New ⭐️",
                 value: ACTIONS.LOCALSTACK_SQS_STATUS,
                 short: "SQS status",
+            },
+            {
+                name: "Secret Manager 🤫",
+                value: ACTIONS.LOCALSTACK_SECRETS_MANAGER,
+                short: "Secret Manager",
             },
         ],
     },

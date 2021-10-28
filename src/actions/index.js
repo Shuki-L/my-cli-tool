@@ -1,6 +1,11 @@
 const { ACTIONS, MENUS } = require("../constants");
 const getMenu = require("../menus");
-const { lambda, eventBridge, sqs } = require("../actions/localstack");
+const {
+    lambda,
+    eventBridge,
+    sqs,
+    secretsManager,
+} = require("../actions/localstack");
 const { quit } = require("./common");
 
 const performAction = async (answers, ctx) => {
@@ -18,7 +23,7 @@ const performAction = async (answers, ctx) => {
             case ACTIONS.LOCALSTACK_LAMBDAS_GET_LOGS:
                 await lambda.getLogs(ctx); //TODO : handle error or get list and generate menu
                 //   probably need to set some params in ctx - not a menu or leaf
-                
+
                 // getMenu(MENUS.LOCALSTACK, ctx);
                 break;
             case ACTIONS.LOCALSTACK_EVENT_BRIDGE_STATUS:
@@ -26,6 +31,10 @@ const performAction = async (answers, ctx) => {
                 break;
             case ACTIONS.LOCALSTACK_SQS_STATUS:
                 await sqs.showStatus(ctx);
+                break;
+            case ACTIONS.LOCALSTACK_SECRETS_MANAGER:
+                await secretsManager.showStatus(ctx);
+                break;
             case ACTIONS.GO_BACK:
                 getMenu(ctx.previousMenu, ctx);
                 break;
