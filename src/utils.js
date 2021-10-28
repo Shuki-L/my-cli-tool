@@ -4,7 +4,7 @@ const toTime = (epocTime) => {
     return new Date(epocTime).toISOString().slice(0, 19).replace("T", " ");
 };
 
-const prettyPringLambdaLogsEvents = (events) => {
+const prettyPrintLambdaLogsEvents = (events) => {
     if (events.length > 0) {
         const startTime = toTime(events[0].timestamp);
         const endTime = toTime(events[events.length - 1].timestamp);
@@ -17,7 +17,7 @@ const handleError = (error) => {
             case 255:
                 console.log(
                     chalk.red.bold(
-                        "ERROR: make shure you have localstack up and running"
+                        "ERROR: make sure you have localstack up and running"
                     )
                 );
                 break; // TODO: add verbose mode
