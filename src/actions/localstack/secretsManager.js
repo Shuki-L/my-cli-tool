@@ -10,6 +10,7 @@ const {
 const showStatus = async (ctx) => {
     try {
         const config = {
+            region: "us-east-1",
             endpoint: "http://localhost:4566",
         };
         // a client can be shared by different commands.
@@ -23,10 +24,16 @@ const showStatus = async (ctx) => {
         const response = await client.send(command);
         const secretList = response.SecretList;
 
-        for (let i = 0; i < secretList.length; i++) {
-            console.log(
-                `${i + 1}: ${secretList[i].Name} (${secretList[i].Description})`
-            );
+        if (secretList.length === 0) {
+            console.log("No secrets found");
+        } else {
+            for (let i = 0; i < secretList.length; i++) {
+                console.log(
+                    `${i + 1}: ${secretList[i].Name} (${
+                        secretList[i].Description
+                    })`
+                );
+            }
         }
 
         getMenu(MENUS.LOCALSTACK, ctx);
