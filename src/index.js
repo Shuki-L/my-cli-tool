@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const chalk = require("chalk");
-const { DEFAULT_NAME, MENUS, ACTIONS } = require("./constants");
+const { MENUS } = require("./constants");
 
 const getMenu = require("./menus");
 const performAction = require("./actions");
@@ -35,8 +35,7 @@ const checkForUpdates = (currentVersion, latestRelease) => {
 
 const startApp = async () => {
     console.clear();
-    const name = false ? `` : DEFAULT_NAME; //allow user to set a name - TBD
-    const currentVersion = process.env.npm_package_version;
+    const { currentVersion } = require("../package.json");
 
     // get latest release
     getLatestRelease()

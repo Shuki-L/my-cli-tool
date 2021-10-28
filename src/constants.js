@@ -1,5 +1,3 @@
-const DEFAULT_NAME = "your";
-
 const DEFAULT_LINKS = [];
 
 const MENUS = {
@@ -29,7 +27,6 @@ const ACTIONS = {
 };
 
 module.exports = {
-    DEFAULT_NAME,
     DEFAULT_LINKS,
     MENUS,
     ACTIONS,
