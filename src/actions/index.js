@@ -50,7 +50,8 @@ const performAction = async (answers, ctx) => {
                 );
                 console.log(
                     chalk.yellow.bold.italic(
-                        "https://github.com/Shuki-L/my-cli-tool/issues/new/choose"
+                        "https://github.com/Shuki-L/my-cli-tool/issues/new/choose" +
+                        chalk.gray("   (<-- CMD+click to open the link)")
                     )
                 );
                 getMenu(MENUS.MAIN, ctx);
