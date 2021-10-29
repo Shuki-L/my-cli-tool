@@ -14,6 +14,7 @@ const getCommonMenu = (ctx) => {
                   },
               ]
             : []),
+        ...[{ name: "👻 Send feedback", value: ACTIONS.SENT_FEEDBACK, short: "Feedback" }],
         ...[{ name: "🚪 Quit", value: ACTIONS.QUIT, short: "Bye Bye" }],
     ];
 };

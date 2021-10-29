@@ -7,6 +7,7 @@ const {
     secretsManager,
 } = require("../actions/localstack");
 const { quit } = require("./common");
+const chalk = require("chalk");
 
 const performAction = async (answers, ctx) => {
     if (typeof answers.choice === "function") {
@@ -39,6 +40,19 @@ const performAction = async (answers, ctx) => {
                 getMenu(ctx.previousMenu, ctx);
                 break;
             case ACTIONS.GET_MAIN_MENU:
+                getMenu(MENUS.MAIN, ctx);
+                break;
+            case ACTIONS.SENT_FEEDBACK:
+                console.log(
+                    chalk.yellow.bold(
+                        "For feature requests, bug report or any other feedback, please raise an issue at:"
+                    )
+                );
+                console.log(
+                    chalk.yellow.bold.italic(
+                        "https://github.com/Shuki-L/my-cli-tool/issues/new/choose"
+                    )
+                );
                 getMenu(MENUS.MAIN, ctx);
                 break;
             case ACTIONS.QUIT:

@@ -5,18 +5,18 @@ const { MENUS } = require("./constants");
 
 const getMenu = require("./menus");
 const performAction = require("./actions");
-const { Octokit } = require("@octokit/core");
+const { Octokit } = require("@octokit/rest");
 const ctx = { performAction, mainMenu: MENUS.MAIN, currentMenu: MENUS.MAIN };
 
+const octokit = new Octokit();
+
 const getLatestRelease = async () => {
-    const octokit = new Octokit();
     const {
         data: { tag_name },
-    } = await octokit.request("GET /repos/{owner}/{repo}/releases/latest", {
+    } = await octokit.repos.getLatestRelease({
         owner: "Shuki-L",
         repo: "my-cli-tool",
     });
-
     return tag_name;
 };
 
