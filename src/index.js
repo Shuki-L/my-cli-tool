@@ -41,7 +41,7 @@ const startApp = async () => {
     getLatestRelease()
         .then((latestRelease) => {
             console.log(
-                chalk.black.bgWhite.bold(`Welcome to TOOLY 🛠️!`) +
+                chalk.black.bgWhite.bold(`   Welcome to TOOLY 🛠️!   `) +
                     chalk.gray(`            (Release: ${version})`)
             );
 

@@ -11,6 +11,10 @@ const showStatus = async (ctx) => {
     try {
         const config = {
             region: "us-east-1",
+            credentials: {
+                accessKeyId: "accessKeyId",
+                secretAccessKey: "secretAccessKey",
+            },
             endpoint: "http://localhost:4566",
         };
         // a client can be shared by different commands.
