@@ -2,13 +2,29 @@ const execa = require("execa");
 const getMenu = require("../../menus");
 const { MENUS } = require("../../constants");
 const { handleError } = require("../../utils");
+const { SQSClient, ListQueuesCommand } = require("@aws-sdk/client-sqs");
 
 const showStatus = async (ctx) => {
     try {
-        const sqsList = await execa("awslocal", ["sqs", "list-queues"]);
+        const config = {
+            region: "us-east-1",
+            credentials: {
+                accessKeyId: "accessKeyId",
+                secretAccessKey: "secretAccessKey",
+            },
+            endpoint: "http://localhost:4566",
+        };
 
-        const sqsQueues = JSON.parse(sqsList.stdout).QueueUrls;
-        console.log(sqsQueues);
+        const client = new SQSClient(config);
+        const input = {
+            // MaxResults: 10,
+        };
+
+        const command = new ListQueuesCommand(input);
+        const response = await client.send(command);
+        const queues = response.QueueUrls;
+
+        console.log(queues);
 
         getMenu(MENUS.LOCALSTACK, ctx);
     } catch (error) {
