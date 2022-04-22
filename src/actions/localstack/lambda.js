@@ -1,6 +1,8 @@
 const execa = require("execa");
 const chalk = require("chalk");
+
 const getMenu = require("../../menus");
+const Logs = require("./logs");
 const { ACTIONS, MENUS } = require("../../constants");
 const { toTime, handleError } = require("../../utils");
 
@@ -83,7 +85,7 @@ const _buildGroupsMenu = (ctx, logGroups) => {
 const _buildStreamsMenu = (ctx, logStreams, logGroupName) => {
     if (logStreams.length > 0) {
         const items = logStreams.map((s, i) => {
-            const streamName = `${i + 1}) ${toTime(s.creationTime)}`;
+            const streamName = `${i + 1}) ${toTime(s.lastEventTimestamp)}`;
             return {
                 name: streamName,
                 value: (ctx) => {
@@ -151,31 +153,8 @@ const _prettyPrint = (logEvents) => {
 
 const _getStreamEvents = async (logGroupName, logStreamName) => {
     try {
-        const { stdout } = await execa("awslocal", [
-            "logs",
-            "get-log-events",
-            "--log-group-name",
-            `${logGroupName}`,
-            "--log-stream-name",
-            `${logStreamName}`,
-        ]);
-
-        return JSON.parse(stdout).events;
-    } catch (error) {
-        handleError(error);
-    }
-};
-
-const _getLogGroupStreams = async (logGroupName) => {
-    try {
-        const { stdout } = await execa("awslocal", [
-            "logs",
-            "describe-log-streams",
-            "--log-group-name",
-            `${logGroupName}`,
-            "--descending",
-        ]);
-        return JSON.parse(stdout).logStreams;
+        const events = await new Logs().getStreamEvents(logGroupName, logStreamName);
+        return events;
     } catch (error) {
         handleError(error);
     }
@@ -183,21 +162,8 @@ const _getLogGroupStreams = async (logGroupName) => {
 
 const _getStreams = async (ctx, logGroupName) => {
     try {
-        const logStreams = await _getLogGroupStreams(logGroupName);
+        const logStreams = await new Logs().getLogGroupStreams(logGroupName);
         _buildStreamsMenu(ctx, logStreams, logGroupName);
-    } catch (error) {
-        handleError(error);
-    }
-};
-
-const _getDescribeLogGroups = async () => {
-    try {
-        const { stdout } = await execa("awslocal", [
-            "logs",
-            "describe-log-groups",
-        ]);
-
-        return JSON.parse(stdout).logGroups;
     } catch (error) {
         handleError(error);
     }
@@ -205,7 +171,7 @@ const _getDescribeLogGroups = async () => {
 
 const getLogs = async (ctx) => {
     try {
-        const logGroups = await _getDescribeLogGroups(ctx);
+        const logGroups = await new Logs().getLogGroups();
         _buildGroupsMenu(ctx, logGroups);
     } catch (error) {
         handleError(error);
