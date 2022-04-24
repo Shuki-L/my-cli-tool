@@ -2,12 +2,13 @@ const inquirer = require("inquirer");
 const { getCommonMenu } = require("./common");
 const main = require("./main");
 const localstack = require("./localstack");
+const github = require("./github");
 const { MENUS } = require("../constants");
 
 const getMenu = (menuName, ctx, menus = null) => {
     try {
         //todo inject custom menu
-        menus = menus || { ...main, ...localstack };
+        menus = menus || { ...main, ...localstack, ...github };
 
         const { items, meta = {} } = menus[menuName];
 

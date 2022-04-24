@@ -8,6 +8,11 @@ const main = {
                 value: ACTIONS.LOCALSTACK_GET_MENU,
                 short: "Query localstack",
             },
+            {
+                name: "Github Actions",
+                value: ACTIONS.GITHUB_ACTIONS_MENU,
+                short: "Query localstack",
+            },
         ],
         meta: {
             isMain: true,
