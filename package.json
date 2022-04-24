@@ -1,6 +1,6 @@
 {
   "name": "tooly",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "CLI tool for common tasks",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
