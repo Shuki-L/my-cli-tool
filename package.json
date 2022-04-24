@@ -1,6 +1,6 @@
 {
   "name": "tooly",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "CLI tool for common tasks",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -28,6 +28,9 @@
     "@aws-sdk/client-lambda": "^3.42.0",
     "@aws-sdk/client-secrets-manager": "^3.38.0",
     "@aws-sdk/client-sqs": "^3.43.0",
+    "@inquirer/input": "^0.0.18-alpha.0",
+    "@octokit/auth-app": "^3.6.1",
+    "@octokit/request": "^5.6.3",
     "@octokit/rest": "^18.12.0",
     "cfonts": "^2.4.5",
     "chalk": "^4.1.1",
